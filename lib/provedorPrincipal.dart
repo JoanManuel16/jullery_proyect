@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/provedorClas.dart';
 import 'package:flutter_application_1/provedorW.dart';
 
 class PorvedorPrinciapl extends StatelessWidget {
@@ -17,6 +18,7 @@ class PorvedorPrinciapl extends StatelessWidget {
             Navigator.pushNamed(
               context,
               "/provedor",
+              arguments: ProvedorClass(edicion: false)
             );
           },
           child: Icon(Icons.add)),

@@ -5,13 +5,21 @@ import 'package:flutter_application_1/provedorClas.dart';
 import 'db.dart';
 
 class Provedor extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final nombreController = TextEditingController();
   final CI = TextEditingController();
   final movil = TextEditingController();
   final direccion = TextEditingController();
   final notas = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    ProvedorClass pc = ModalRoute.of(context).settings.arguments;
+    nombreController.text = pc.nombre;
+    CI.text = pc.Ci;
+    movil.text = pc.movil;
+    direccion.text = pc.direccion;
+    notas.text = pc.notas;
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Provedor'),
@@ -73,7 +81,6 @@ class Provedor extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
-
                     controller: direccion,
                     validator: (value) {
                       if (value.isEmpty) return "Campo Obligatorio";
@@ -104,9 +111,26 @@ class Provedor extends StatelessWidget {
                     height: 100,
                     child: ElevatedButton(
                       onPressed: () {
-                        DB.insertProvedor(ProvedorClass(nombre: nombreController.text,Ci: CI.text,direccion: direccion.text,movil: int.parse(movil.text), notas: notas.text));
-                        Navigator.pushNamed(context,"/provedorPrincipal");
-
+                          if (pc.edicion) {
+                            DB.updateProvedor(ProvedorClass(
+                                nombre: nombreController.text,
+                                Ci: CI.text,
+                                direccion: direccion.text,
+                                movil: movil.text,
+                                notas: notas.text));
+                            Navigator.pushNamed(context, "/provedorPrincipal");
+                          }
+                        
+                        else {
+                           DB.insertProvedor(ProvedorClass(
+                                nombre: nombreController.text,
+                                Ci: CI.text,
+                                direccion: direccion.text,
+                                movil: movil.text,
+                                notas: notas.text));
+                            Navigator.pushNamed(context, "/provedorPrincipal");
+                        
+                        }
                       },
                       child: Text('Guardar'),
                     ),
