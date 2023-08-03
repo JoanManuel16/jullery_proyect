@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/provedorClas.dart';
-import 'package:flutter_application_1/provedorW.dart';
+import 'package:flutter_application_1/Proveedor/provedorClas.dart';
+import 'package:flutter_application_1/Proveedor/provedorW.dart';
+
 
 class PorvedorPrinciapl extends StatelessWidget {
   const PorvedorPrinciapl({Key key}) : super(key: key);

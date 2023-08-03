@@ -1,9 +1,7 @@
-
-
-import 'package:flutter_application_1/provedorClas.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import 'Proveedor/provedorClas.dart';
 import 'animal.dart';
 
 class DB {

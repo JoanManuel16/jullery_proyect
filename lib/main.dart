@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Provedor.dart';
+
 import 'package:flutter_application_1/principal.dart';
-import 'package:flutter_application_1/provedorPrincipal.dart';
+
+import 'Proveedor/Provedor.dart';
+import 'Proveedor/provedorPrincipal.dart';
 import 'editar.dart';
 import 'listado.dart';
 

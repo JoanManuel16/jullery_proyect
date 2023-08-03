@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Proveedor/provedorClas.dart';
 import 'package:flutter_application_1/db.dart';
-import 'package:flutter_application_1/provedorClas.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PorvedorW extends StatefulWidget {

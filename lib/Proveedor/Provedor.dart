@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/provedorClas.dart';
+import 'package:flutter_application_1/Proveedor/provedorClas.dart';
 
-import 'db.dart';
+import '../db.dart';
+
+
+
 
 class Provedor extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
