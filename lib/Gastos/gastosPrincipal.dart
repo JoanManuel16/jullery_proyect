@@ -1,0 +1,42 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Gastos/categoriaClass.dart';
+import 'package:flutter_application_1/Gastos/gastosW.dart';
+
+import '../db.dart';
+
+class GastosPrincipal extends StatefulWidget {
+  const GastosPrincipal({Key key}) : super(key: key);
+
+  @override
+  State<GastosPrincipal> createState() => _GastosPrincipalState();
+}
+
+class _GastosPrincipalState extends State<GastosPrincipal> {
+  DateTime fecha = DateTime.now();
+  final costo = TextEditingController();
+  List<CategoriaClass> categorias = [];
+  caragrProvedores() async {
+    DB.insertCategoria(CategoriaClass(categoria: "Gastos Personales", id: 0));
+    List<CategoriaClass> aux = await DB.getAllCategoria();
+    setState(() {
+      categorias = aux;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Listado de gastos"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context,"/agregarGasto");
+        },
+        child: Icon(Icons.add),
+      ),
+      body: GtastosW(),
+    );
+  }
+}

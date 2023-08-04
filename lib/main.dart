@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Gastos/agregarGasto.dart';
+import 'package:flutter_application_1/Gastos/gastosPrincipal.dart';
 
 import 'package:flutter_application_1/principal.dart';
 
 import 'Proveedor/Provedor.dart';
 import 'Proveedor/provedorPrincipal.dart';
-import 'editar.dart';
-import 'listado.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,6 +35,9 @@ class MiApp extends StatelessWidget {
         "/" : (context) => Principal(),
         "/provedorPrincipal" : (context) => PorvedorPrinciapl(),
         "/provedor" : (context) => Provedor(),
+        "/gastos" : (context) => GastosPrincipal(),
+        "/agregarGasto" : (context) => Agregargasto(),
+
       }
     );
   }
