@@ -132,7 +132,8 @@ class Principal extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       print("lo hice");
-                      DB.insertCategoria(CategoriaClass(categoria: "Gastos Personales"));
+                      DB.insertCategoria(CategoriaClass(categoria: "gastos personales"));
+                      DB.insertCategoria(CategoriaClass(categoria: "Otros"));
                     },
                     child: Icon(Icons.ac_unit_sharp),
                   ),

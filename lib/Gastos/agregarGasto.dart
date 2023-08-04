@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Gastos/createDrop.dart';
 import 'package:intl/intl.dart';
 import '../db.dart';
 import 'categoriaClass.dart';
+import 'package:uuid/uuid.dart';
 
 class Agregargasto extends StatefulWidget {
+  const Agregargasto({Key key}) : super(key: key);
+
   @override
   State<Agregargasto> createState() => _AgregargastoState();
 }
 
 class _AgregargastoState extends State<Agregargasto> {
   DateTime fecha = DateTime.now();
-
   final costo = TextEditingController();
 
-  List<CategoriaClass> categorias = [];
-  void initState() {
-    caragrCategorias();
-    super.initState();
-  }
+
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -34,12 +33,7 @@ class _AgregargastoState extends State<Agregargasto> {
     });
   }
 
-  caragrCategorias() async {
-    List<CategoriaClass> aux = await DB.getAllCategoria();
-    setState(() {
-      categorias = aux;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,74 +41,60 @@ class _AgregargastoState extends State<Agregargasto> {
         appBar: AppBar(
           title: Text("Agregar Gasto"),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Column(
+        body: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
                 children: [
-                  Text("Fecha"),
+                  Column(
+                    children: [
+                      Text("Fecha"),
+                      Container(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          child: Text(DateFormat('yyyy-MM-dd').format(fecha)),
+                          onPressed: () {
+                            _selectDate(context);
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: costo,
+                    validator: (value) {
+                      if (value.isEmpty) return "Campo Obligatorio";
+                      return null;
+                    },
+                    keyboardType: TextInputType.number,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Costo',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  MyDropdownButton(),
+                  SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
-                    child: Text(DateFormat('yyyy-MM-dd').format(fecha)),
+                    child: Text("Guardar"),
                     onPressed: () {
-                      _selectDate(context);
+                      //TODO
                     },
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: costo,
-                validator: (value) {
-                  if (value.isEmpty) return "Campo Obligatorio";
-                  return null;
-                },
-                keyboardType: TextInputType.number,
-                obscureText: false,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Costo',
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  DropdownButton<String>(
-                    value: categorias[0].categoria,
-                    items: categorias.map((CategoriaClass elemento) {
-                      return DropdownMenuItem<String>(
-                        value: elemento.categoria,
-                        child: Text(elemento.categoria),
-                      );
-                    }).toList(),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        categorias[0].categoria = "$newValue";
-                      });
-                    },
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    height: 30,
-                    width: 30,
-                    child: FloatingActionButton(onPressed: () {
-                    //para agregar las categorias
-                  },child: Icon(Icons.add),),
-                  )
-                ],
-              ),
-              ElevatedButton(
-                child: Text("Guardar"),
-                onPressed: () {
-                  //TODO
-                },
-              ),
-            ],
-          ),
+            )
+          ],
         ));
   }
 }
