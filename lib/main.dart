@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Gastos/agregarGasto.dart';
+import 'package:flutter_application_1/Gastos/createDrop.dart';
 import 'package:flutter_application_1/Gastos/gastosPrincipal.dart';
 
 import 'package:flutter_application_1/principal.dart';
@@ -36,7 +36,7 @@ class MiApp extends StatelessWidget {
         "/provedorPrincipal" : (context) => PorvedorPrinciapl(),
         "/provedor" : (context) => Provedor(),
         "/gastos" : (context) => GastosPrincipal(),
-        "/agregarGasto" : (context) => Agregargasto(),
+        "/crearDrop" : (context) => MyDropdownButton(),
 
       }
     );

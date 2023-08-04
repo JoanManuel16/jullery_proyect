@@ -32,10 +32,10 @@ class _GtastosWState extends State<GtastosW> {
         child: Column(
           children: [
             ListTile(
-              leading: Text(gastos[index].categoria),
-              title: Text(gastos[index].nombre),
+              leading: Text(gastos[index].nombre),
+              title: Text(gastos[index].categoria),
               subtitle: Text(gastos[index].fecha),
-              trailing: Text(gastos[index].importe.toString()),
+              trailing: Text(gastos[index].importe.toString()+"\$"),
             ),
           ],
         ),

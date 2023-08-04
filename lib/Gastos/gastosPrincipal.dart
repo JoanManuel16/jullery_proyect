@@ -17,7 +17,6 @@ class _GastosPrincipalState extends State<GastosPrincipal> {
   final costo = TextEditingController();
   List<CategoriaClass> categorias = [];
   caragrProvedores() async {
-    DB.insertCategoria(CategoriaClass(categoria: "Gastos Personales", id: 0));
     List<CategoriaClass> aux = await DB.getAllCategoria();
     setState(() {
       categorias = aux;
@@ -32,7 +31,7 @@ class _GastosPrincipalState extends State<GastosPrincipal> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context,"/agregarGasto");
+          Navigator.pushNamed(context,"/crearDrop");
         },
         child: Icon(Icons.add),
       ),
