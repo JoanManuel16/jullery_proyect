@@ -8,7 +8,6 @@ import '../db.dart';
 
 
 class Provedor extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
   final nombreController = TextEditingController();
   final CI = TextEditingController();
   final movil = TextEditingController();

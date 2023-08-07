@@ -50,8 +50,10 @@ class Principal extends StatelessWidget {
                     height: 100,
                     width: 100,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Icon(Icons.ac_unit_sharp),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/inventarioPrincipal");
+                      },
+                      child: Icon(Icons.inventory_2_outlined),
                     ),
                   )),
                 ],

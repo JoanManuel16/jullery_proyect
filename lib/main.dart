@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Gastos/createDrop.dart';
 import 'package:flutter_application_1/Gastos/gastosPrincipal.dart';
+import 'package:flutter_application_1/Inventario/crearInventario.dart';
+import 'package:flutter_application_1/Inventario/inventarioPrincipal.dart';
 
 import 'package:flutter_application_1/principal.dart';
 
@@ -37,6 +39,8 @@ class MiApp extends StatelessWidget {
         "/provedor" : (context) => Provedor(),
         "/gastos" : (context) => GastosPrincipal(),
         "/crearDrop" : (context) => MyDropdownButton(),
+        "/inventarioPrincipal" : (context) => inventarioPricipal(),
+        "/crearInventario" : (context) => CrearInventario()
 
       }
     );
