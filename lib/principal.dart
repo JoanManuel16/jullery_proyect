@@ -53,7 +53,14 @@ class Principal extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, "/inventarioPrincipal");
                       },
-                      child: Icon(Icons.inventory_2_outlined),
+                      child: Column(
+                        children: [
+                          Icon(Icons.inventory_2_outlined,size: 50),
+                          SizedBox(height: 10,),
+                          Text("Inventario"),
+                        ]
+                          
+                      )
                     ),
                   )),
                 ],
@@ -133,9 +140,6 @@ class Principal extends StatelessWidget {
                   width: 400,
                   child: ElevatedButton(
                     onPressed: () {
-                      print("lo hice");
-                      DB.insertCategoria(CategoriaClass(categoria: "gastos personales"));
-                      DB.insertCategoria(CategoriaClass(categoria: "Otros"));
                     },
                     child: Icon(Icons.ac_unit_sharp),
                   ),

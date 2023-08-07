@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/Inventario/invantarioClass.dart';
 import 'package:flutter_application_1/Inventario/material.dart';
 import 'package:flutter_application_1/Inventario/tipoDeJoya.dart';
 
@@ -270,7 +271,34 @@ class _CrearInventarioState extends State<CrearInventario> {
                     ),
                     ElevatedButton(
                       child: Text("Guardar"),
-                      onPressed: () {},
+                      onPressed: () {
+                        int cantidadInt = int.parse(cantidad.text);
+                        double gramajeInt = double.parse(gramaje.text);
+
+                        double precioBuscado;
+
+                        materiales.map((material) {
+                          if (material.material == selectedValueMaterial) {
+                            precioBuscado = material.precio;
+                          }
+                        }).toList();
+                        InventarioClass(
+                            cantidad: cantidadInt,
+                            gramaje: gramajeInt,
+                            material: selectedValueMaterial,
+                            tipo_joya: selectedValueJoya,
+                            precio_individual: precioBuscado,
+                            precio_total: (precioBuscado * cantidadInt));
+
+                        DB.insertInventario(InventarioClass(
+                            cantidad: cantidadInt,
+                            gramaje: gramajeInt,
+                            material: selectedValueMaterial,
+                            tipo_joya: selectedValueJoya,
+                            precio_individual: precioBuscado,
+                            precio_total: (precioBuscado * cantidadInt)*25));
+                            Navigator.pushNamed(context,"/inventarioPrincipal");
+                      },
                     ),
                   ],
                 ),
