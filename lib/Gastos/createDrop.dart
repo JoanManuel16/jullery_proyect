@@ -46,6 +46,7 @@ class _MyDropdownButtonState extends State<MyDropdownButton> {
           fecha = selectedDate;
         });
       }
+      return fecha;
     });
     return picked;
   }

@@ -13,8 +13,8 @@ class Provedor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    proveedor_class pc =
-        ModalRoute.of(context)!.settings.arguments as proveedor_class;
+    ProvedorClass pc =
+        ModalRoute.of(context)!.settings.arguments as ProvedorClass;
     nombreController.text = pc.getNombre();
     CI.text = pc.Ci;
     movil.text = pc.movil;
@@ -112,7 +112,7 @@ class Provedor extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (pc.edicion) {
-                          DB.updateProvedor(proveedor_class(
+                          DB.updateProvedor(ProvedorClass(
                               nombre: nombreController.text,
                               Ci: CI.text,
                               direccion: direccion.text,
@@ -121,7 +121,7 @@ class Provedor extends StatelessWidget {
                               edicion: true));
                           Navigator.pushNamed(context, "/provedorPrincipal");
                         } else {
-                          DB.insertProvedor(proveedor_class(
+                          DB.insertProvedor(ProvedorClass(
                               nombre: nombreController.text,
                               Ci: CI.text,
                               direccion: direccion.text,

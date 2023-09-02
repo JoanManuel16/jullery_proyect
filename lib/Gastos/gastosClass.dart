@@ -3,7 +3,7 @@ class GastosClass {
   int importe;
   String categoria;
   String nombre;
-  GastosClass({this.fecha, this.importe, this.categoria, this.nombre});
+  GastosClass({required this.fecha, required this.importe,required this.categoria,required this.nombre});
   Map<String, dynamic> toMap() {
     return {
       'fecha': fecha,

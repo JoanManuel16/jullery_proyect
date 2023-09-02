@@ -5,7 +5,7 @@ import 'package:flutter_application_1/Inventario/invantarioClass.dart';
 import '../db.dart';
 
 class InventarioW extends StatefulWidget {
-  InventarioW({Key key}) : super(key: key);
+ 
 
   @override
   _InventarioWState createState() => _InventarioWState();

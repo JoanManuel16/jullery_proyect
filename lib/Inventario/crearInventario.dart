@@ -184,8 +184,8 @@ class _CrearInventarioState extends State<CrearInventario> {
                           value: selectedValueMaterial,
                           items: uniquelistMaterial.map((country) {
                             return DropdownMenuItem(
-                              child: Text(country.material),
                               value: country.material,
+                              child: Text(country.material),
                             );
                           }).toList(),
                           onChanged: (country) {
@@ -280,7 +280,7 @@ class _CrearInventarioState extends State<CrearInventario> {
 
                         materiales.map((material) {
                           if (material.material == selectedValueMaterial) {
-                            precioBuscado = material.precio;
+                            precioBuscado = material.precio!;
                           }
                         }).toList();
 

@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import 'Proveedor/provedorClas.dart';
-import 'animal.dart';
+
 
 class DB {
   static Future<Database> _openDB() async {
@@ -38,35 +38,35 @@ class DB {
   }
 
 //CRUD del provedor
-  static Future<void> insertProvedor(proveedor_class pc) async {
+  static Future<void> insertProvedor(ProvedorClass pc) async {
     Database database = await _openDB();
 
     database.insert("provedores", pc.toMap());
     return;
   }
 
-  static Future<void> deleteProvedor(proveedor_class pc) async {
+  static Future<void> deleteProvedor(ProvedorClass pc) async {
     Database database = await _openDB();
 
     database.delete("provedores", where: "CI = ?", whereArgs: [pc.Ci]);
     return;
   }
 
-  static Future<void> updateProvedor(proveedor_class pc) async {
+  static Future<void> updateProvedor(ProvedorClass pc) async {
     Database database = await _openDB();
     database
         .update("provedores", pc.toMap(), where: "CI = ?", whereArgs: [pc.Ci]);
     return;
   }
 
-  static Future<List<proveedor_class>> getAllProvedores() async {
+  static Future<List<ProvedorClass>> getAllProvedores() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> provedoresMap =
         await database.query("provedores");
 
     return List.generate(
         provedoresMap.length,
-        (i) => proveedor_class(
+        (i) => ProvedorClass(
             nombre: provedoresMap[i]['nombre'],
             Ci: provedoresMap[i]['CI'],
             direccion: provedoresMap[i]['direccion'],
@@ -148,7 +148,7 @@ class DB {
         (i) => MaterialClass(
             material: provedoresMap[i]['material'],
             precio: provedoresMap[i]['precio'],
-            id_material: 1));
+          ));
   }
 
 //Fin del CRUD de los materiales
@@ -221,10 +221,10 @@ class DB {
 
 //fin del CRUD de los tipos
   // CON SENTENCIAS
-  static Future<void> insertar2(Animal animal) async {
+/*  static Future<void> insertar2(Animal animal) async {
     Database database = await _openDB();
     var resultado =
         await database.rawInsert("INSERT INTO animales (id, nombre, especie)"
             " VALUES (${animal.id}, ${animal.nombre}, ${animal.especie})");
-  }
+  }*/
 }
