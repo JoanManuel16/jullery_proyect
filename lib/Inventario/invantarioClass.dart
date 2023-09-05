@@ -1,13 +1,15 @@
 class InventarioClass {
-  int id_inventario;
+  int ? id_inventario;
   String tipo_joya;
   int cantidad;
   double gramaje;
   String material;
   double precio_individual;
   double precio_total;
+  bool ? edicion;
   InventarioClass(
-      {required this.id_inventario,
+      {this.id_inventario,
+      this.edicion,
       required this.tipo_joya,
       required this.cantidad,
       required this.gramaje,

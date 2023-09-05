@@ -91,7 +91,15 @@ class Principal extends StatelessWidget {
                   width: 100,
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: const Icon(Icons.ac_unit_sharp),
+                    child: const Column(
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            size: 50,
+                          ),
+                          Text("Editar Materiales")
+                        ],
+                      ),
                   ),
                 )),
               ],

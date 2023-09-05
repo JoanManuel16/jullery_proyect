@@ -168,7 +168,7 @@ class _MyDropdownButtonState extends State<MyDropdownButton> {
                                           setState(() {
                                             DB.insertCategoria(CategoriaClass(
                                                 categoria: textFieldValue,
-                                                id: 1));
+                                                ));
                                             caragrCategorias();
                                             Navigator.of(context).pop();
                                           });

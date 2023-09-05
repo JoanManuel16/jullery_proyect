@@ -26,6 +26,7 @@ class _CrearInventarioState extends State<CrearInventario> {
   double _precio = 0.0;
   String selectedValueMaterial = "";
   String selectedValueJoya = "";
+
   caragrMaeriales() async {
     List<MaterialClass> aux = await DB.getAllMateriales();
     setState(() {
@@ -66,6 +67,15 @@ class _CrearInventarioState extends State<CrearInventario> {
 
   @override
   Widget build(BuildContext context) {
+    InventarioClass ic =
+        ModalRoute.of(context)!.settings.arguments as InventarioClass;
+        cantidad.text=ic.cantidad.toString();
+        gramaje.text=ic.gramaje.toString();
+        if(ic.edicion==true){
+          selectedValueJoya = ic.tipo_joya;
+        selectedValueMaterial= ic.material;
+        }
+        
     return Scaffold(
       appBar: AppBar(
         title: Text("Inventario"),
@@ -284,23 +294,25 @@ class _CrearInventarioState extends State<CrearInventario> {
                           }
                         }).toList();
 
-                        InventarioClass(
-                            id_inventario: 1,
-                            cantidad: cantidadInt,
-                            gramaje: gramajeInt,
-                            material: selectedValueMaterial,
-                            tipo_joya: selectedValueJoya,
-                            precio_individual: precioBuscado,
-                            precio_total: (precioBuscado * cantidadInt));
-
-                        DB.insertInventario(InventarioClass(
-                            id_inventario: 1,
+                        if(ic.edicion==true){
+                           DB.updateInventario(InventarioClass(
+                            id_inventario: ic.id_inventario,
                             cantidad: cantidadInt,
                             gramaje: gramajeInt,
                             material: selectedValueMaterial,
                             tipo_joya: selectedValueJoya,
                             precio_individual: precioBuscado,
                             precio_total: (precioBuscado * cantidadInt) * 25));
+                        }else{
+                           DB.insertInventario(InventarioClass(
+                            cantidad: cantidadInt,
+                            gramaje: gramajeInt,
+                            material: selectedValueMaterial,
+                            tipo_joya: selectedValueJoya,
+                            precio_individual: precioBuscado,
+                            precio_total: (precioBuscado * cantidadInt) * 25));
+                        }
+                       
                         Navigator.pushNamed(context, "/inventarioPrincipal");
                       },
                     ),
