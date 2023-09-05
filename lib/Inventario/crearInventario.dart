@@ -69,13 +69,13 @@ class _CrearInventarioState extends State<CrearInventario> {
   Widget build(BuildContext context) {
     InventarioClass ic =
         ModalRoute.of(context)!.settings.arguments as InventarioClass;
-        cantidad.text=ic.cantidad.toString();
-        gramaje.text=ic.gramaje.toString();
-        if(ic.edicion==true){
-          selectedValueJoya = ic.tipo_joya;
-        selectedValueMaterial= ic.material;
-        }
-        
+    cantidad.text = ic.cantidad.toString();
+    gramaje.text = ic.gramaje.toString();
+    if (ic.edicion == true) {
+      selectedValueJoya = ic.tipo_joya;
+      selectedValueMaterial = ic.material;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Inventario"),
@@ -283,37 +283,61 @@ class _CrearInventarioState extends State<CrearInventario> {
                     ElevatedButton(
                       child: Text("Guardar"),
                       onPressed: () {
-                        int cantidadInt = int.parse(cantidad.text);
-                        double gramajeInt = double.parse(gramaje.text);
+                        if (cantidad.text.isEmpty || gramaje.text.isEmpty || cantidad.text =='0' || gramaje.text =='0.0') {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Campos Vacíos'),
+                                content: Text(
+                                    'Por favor, complete todos los campos obligatorios.'),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Aceptar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          int cantidadInt = int.parse(cantidad.text);
+                          double gramajeInt = double.parse(gramaje.text);
 
-                        double precioBuscado = 0.0;
+                          double precioBuscado = 0.0;
 
-                        materiales.map((material) {
-                          if (material.material == selectedValueMaterial) {
-                            precioBuscado = material.precio!;
+                          materiales.map((material) {
+                            if (material.material == selectedValueMaterial) {
+                              precioBuscado = material.precio!;
+                            }
+                          }).toList();
+
+                          if (ic.edicion == true) {
+                            DB.updateInventario(InventarioClass(
+                                id_inventario: ic.id_inventario,
+                                cantidad: cantidadInt,
+                                gramaje: gramajeInt,
+                                material: selectedValueMaterial,
+                                tipo_joya: selectedValueJoya,
+                                precio_individual: precioBuscado,
+                                precio_total:
+                                    (precioBuscado * cantidadInt) * 25));
+                          } else {
+                            DB.insertInventario(InventarioClass(
+                                cantidad: cantidadInt,
+                                gramaje: gramajeInt,
+                                material: selectedValueMaterial,
+                                tipo_joya: selectedValueJoya,
+                                precio_individual: precioBuscado,
+                                precio_total:
+                                    (precioBuscado * cantidadInt) * 25));
                           }
-                        }).toList();
 
-                        if(ic.edicion==true){
-                           DB.updateInventario(InventarioClass(
-                            id_inventario: ic.id_inventario,
-                            cantidad: cantidadInt,
-                            gramaje: gramajeInt,
-                            material: selectedValueMaterial,
-                            tipo_joya: selectedValueJoya,
-                            precio_individual: precioBuscado,
-                            precio_total: (precioBuscado * cantidadInt) * 25));
-                        }else{
-                           DB.insertInventario(InventarioClass(
-                            cantidad: cantidadInt,
-                            gramaje: gramajeInt,
-                            material: selectedValueMaterial,
-                            tipo_joya: selectedValueJoya,
-                            precio_individual: precioBuscado,
-                            precio_total: (precioBuscado * cantidadInt) * 25));
+                          Navigator.pushNamed(
+                              context, "/inventarioPrincipal");
                         }
-                       
-                        Navigator.pushNamed(context, "/inventarioPrincipal");
                       },
                     ),
                   ],

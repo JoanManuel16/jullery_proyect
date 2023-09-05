@@ -8,7 +8,6 @@ import 'package:path/path.dart';
 
 import 'Proveedor/provedorClas.dart';
 
-
 class DB {
   static Future<Database> _openDB() async {
     return openDatabase(
@@ -146,9 +145,10 @@ class DB {
     return List.generate(
         provedoresMap.length,
         (i) => MaterialClass(
-            material: provedoresMap[i]['material'],
-            precio: provedoresMap[i]['precio'],
-          ));
+              id_material: provedoresMap[i]['id_material'],
+              material: provedoresMap[i]['material'],
+              precio: provedoresMap[i]['precio'],
+            ));
   }
 
 //Fin del CRUD de los materiales
@@ -177,7 +177,23 @@ class DB {
   static Future<List<InventarioClass>> getAllInventario() async {
     Database database = await _openDB();
     final List<Map<String, dynamic>> provedoresMap =
-        await database.query("inventario");
+        await database.query("inventario",);
+
+    return List.generate(
+        provedoresMap.length,
+        (i) => InventarioClass(
+            cantidad: provedoresMap[i]['cantidad'],
+            gramaje: provedoresMap[i]['gramaje'],
+            id_inventario: provedoresMap[i]['id_inventario'],
+            material: provedoresMap[i]['material'],
+            precio_individual: provedoresMap[i]['precio_individual'],
+            precio_total: provedoresMap[i]['precio_total'],
+            tipo_joya: provedoresMap[i]['tipo_joya']));
+  }
+  static Future<List<InventarioClass>> getAllInventarioByMaterial(String materia) async {
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> provedoresMap =
+        await database.query("inventario",where: "material = ?" , whereArgs: [materia] );
 
     return List.generate(
         provedoresMap.length,

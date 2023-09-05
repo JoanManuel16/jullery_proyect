@@ -90,7 +90,10 @@ class Principal extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                    Navigator.pushNamed(context, "/editarMateriales");
+
+                    },
                     child: const Column(
                         children: [
                           Icon(

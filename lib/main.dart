@@ -8,6 +8,8 @@ import 'package:flutter_application_1/principal.dart';
 
 import 'Proveedor/Provedor.dart';
 import 'Proveedor/provedorPrincipal.dart';
+import 'materiales/agregarmaterial.dart';
+import 'materiales/materialesPrincipal.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,7 +41,9 @@ class MiApp extends StatelessWidget {
       "/gastos": (context) => GastosPrincipal(key: Key("C")),
       "/crearDrop": (context) => MyDropdownButton(),
       "/inventarioPrincipal": (context) => InventarioPricipal(key: Key("D")),
-      "/crearInventario": (context) => CrearInventario(key: Key("E"))
+      "/crearInventario": (context) => CrearInventario(key: Key("E")),
+      "/editarMateriales": (context) => MaterialesPrincipal(key: Key("F"),),
+      "/crearMateriales": (context) => AregarMaerial(key: Key("G"),)
     });
   }
 }
