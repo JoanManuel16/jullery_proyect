@@ -25,7 +25,6 @@ class _PorvedorWState extends State<PorvedorW> {
   }
 
   void callPhoneNumber(String phoneNumber) async {
-    print(phoneNumber);
     String url = 'tel:$phoneNumber';
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -36,7 +35,6 @@ class _PorvedorWState extends State<PorvedorW> {
   }
 
   void openMessagesApp(String phoneNumber) async {
-    print(phoneNumber);
     final String url = 'sms:$phoneNumber';
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -46,6 +44,7 @@ class _PorvedorWState extends State<PorvedorW> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -54,44 +53,39 @@ class _PorvedorWState extends State<PorvedorW> {
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
-            ListTile(
-              leading: Icon(Icons.contact_page_outlined),
-              title: Text(provedores[index].nombre),
-              subtitle: Text(
-                provedores[index].direccion,
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+             ListTile(
+                leading: Icon(Icons.person),
+                title: Text(
+                  'nombre: ${provedores[index].nombre}\n CI: ${provedores[index].Ci}',
+                ),
+                subtitle: Text(
+                  "dirección: ${provedores[index].direccion}\n ${provedores[index].notas}",
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                provedores[index].notas,
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
-              ),
-            ),
             ButtonBar(
               alignment: MainAxisAlignment.start,
               children: [
-                ElevatedButton(
+                IconButton(
                   onPressed: () {
                     callPhoneNumber(provedores[index].movil);
                   },
-                  child: Icon(Icons.phone),
+                  icon: Icon(Icons.phone),
                 ),
-                ElevatedButton(
+                IconButton(
                   onPressed: () {
                     openMessagesApp(provedores[index].movil);
                   },
-                  child: Icon(Icons.message),
+                  icon: Icon(Icons.message),
                 ),
-                 ElevatedButton(
+                IconButton(
                   onPressed: () {
-                    provedores[index].edicion=true;
-                    Navigator.pushNamed(context,"/provedor",arguments: provedores[index]);
+                    provedores[index].edicion = true;
+                    Navigator.pushNamed(context, "/provedor",
+                        arguments: provedores[index]);
                   },
-                  child: Icon(Icons.edit),
+                  icon: Icon(Icons.edit),
                 ),
-                ElevatedButton(
+                IconButton(
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -129,7 +123,7 @@ class _PorvedorWState extends State<PorvedorW> {
                       }
                     });
                   },
-                  child: Icon(Icons.delete),
+                  icon: Icon(Icons.delete),
                 ),
               ],
             ),

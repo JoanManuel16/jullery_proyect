@@ -91,18 +91,17 @@ class Principal extends StatelessWidget {
                   width: 100,
                   child: ElevatedButton(
                     onPressed: () {
-                    Navigator.pushNamed(context, "/editarMateriales");
-
+                      Navigator.pushNamed(context, "/editarMateriales");
                     },
                     child: const Column(
-                        children: [
-                          Icon(
-                            Icons.edit,
-                            size: 50,
-                          ),
-                          Text("Editar Materiales")
-                        ],
-                      ),
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          size: 50,
+                        ),
+                        Text("Editar Materiales")
+                      ],
+                    ),
                   ),
                 )),
               ],
@@ -117,8 +116,18 @@ class Principal extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Icon(Icons.ac_unit_sharp),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/clientePrincipal");
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.shopping_cart_checkout_rounded,
+                          size: 50,
+                        ),
+                        Text("Clientes")
+                      ],
+                    ),
                   ),
                 )),
                 const SizedBox(

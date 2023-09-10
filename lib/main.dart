@@ -8,6 +8,9 @@ import 'package:flutter_application_1/principal.dart';
 
 import 'Proveedor/Provedor.dart';
 import 'Proveedor/provedorPrincipal.dart';
+import 'clientes/agregarCliente.dart';
+import 'clientes/agregarInventarioAlClientePrincial.dart';
+import 'clientes/clientesPrincipal.dart';
 import 'materiales/agregarmaterial.dart';
 import 'materiales/materialesPrincipal.dart';
 
@@ -38,12 +41,27 @@ class MiApp extends StatelessWidget {
           ),
       "/provedorPrincipal": (context) => const PorvedorPrinciapl(key: Key("B")),
       "/provedor": (context) => Provedor(),
-      "/gastos": (context) => GastosPrincipal(key: Key("C")),
+      "/gastos": (context) => const GastosPrincipal(key: Key("C")),
       "/crearDrop": (context) => MyDropdownButton(),
-      "/inventarioPrincipal": (context) => InventarioPricipal(key: Key("D")),
+      "/inventarioPrincipal": (context) =>
+          const InventarioPricipal(key: Key("D")),
       "/crearInventario": (context) => CrearInventario(key: Key("E")),
-      "/editarMateriales": (context) => MaterialesPrincipal(key: Key("F"),),
-      "/crearMateriales": (context) => AregarMaerial(key: Key("G"),)
+      "/editarMateriales": (context) => const MaterialesPrincipal(
+            key: Key("F"),
+          ),
+      "/crearMateriales": (context) => const AregarMaerial(
+            key: Key("G"),
+          ),
+      "/clientePrincipal": (context) => const ClientesPrincipal(
+            key: Key("H"),
+          ),
+      "/crearCliente": (context) => const AgregarCliene(
+            key: Key("I"),
+          ),
+      "/agregarInventarioAlCliente": (context) =>
+          const agregarInventarioAlClientePrincial(
+            key: Key("J"),
+          ),
     });
   }
 }

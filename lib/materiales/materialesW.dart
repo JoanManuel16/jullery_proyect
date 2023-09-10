@@ -62,7 +62,7 @@ class _MaterialesWState extends State<MaterialesW> {
             ButtonBar(
               alignment: MainAxisAlignment.start,
               children: [
-                ElevatedButton(
+                IconButton(
                   onPressed: () {
                     String textFieldValueNombre = material[index].material;
                     String textFieldValueCosto =
@@ -116,7 +116,7 @@ class _MaterialesWState extends State<MaterialesW> {
                                       double.parse(textFieldValueCosto);
                                   DB.updateMaterial(material[index]);
                                   Navigator.of(context).pop();
-                                 _caragrmateriales();
+                                  _caragrmateriales();
                                 });
                               },
                               child: Text('Aceptar'),
@@ -132,7 +132,7 @@ class _MaterialesWState extends State<MaterialesW> {
                       },
                     );
                   },
-                  child: Icon(Icons.edit),
+                  icon: Icon(Icons.edit),
                 ),
               ],
             )

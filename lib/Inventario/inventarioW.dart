@@ -63,14 +63,15 @@ class _InventarioWState extends State<InventarioW> {
                 ButtonBar(
                   alignment: MainAxisAlignment.start,
                   children: [
-                    ElevatedButton(
+                    IconButton(
                       onPressed: () {
-                        inventrio[index].edicion=true;
-                    Navigator.pushNamed(context,"/crearInventario",arguments: inventrio[index]);
+                        inventrio[index].edicion = true;
+                        Navigator.pushNamed(context, "/crearInventario",
+                            arguments: inventrio[index]);
                       },
-                      child: Icon(Icons.edit),
+                      icon: Icon(Icons.edit),
                     ),
-                    ElevatedButton(
+                    IconButton(
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -106,7 +107,7 @@ class _InventarioWState extends State<InventarioW> {
                           }
                         });
                       },
-                      child: Icon(Icons.delete),
+                      icon: Icon(Icons.delete),
                     ),
                   ],
                 ),

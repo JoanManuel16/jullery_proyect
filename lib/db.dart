@@ -7,6 +7,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import 'Proveedor/provedorClas.dart';
+import 'clientes/clientesClass.dart';
+import 'clientes/clientesInventarioClass.dart';
 
 class DB {
   static Future<Database> _openDB() async {
@@ -30,6 +32,12 @@ class DB {
         );
         await db.execute(
           "CREATE TABLE tipo (id_joya INTEGER PRIMARY KEY, tipo TEXT)",
+        );
+        await db.execute(
+          "CREATE TABLE clientes (idCliente INTEGER PRIMARY KEY, nombre TEXT, ci TEXT, movil TEXT, direccion TEXT, notas TEXT)",
+        );
+        await db.execute(
+          "CREATE TABLE clienteInventario (idClienteInventario INTEGER PRIMARY KEY, idCliente INTEGER, tipo_joya TEXT,cantidad INTEGER,gramaje DOUBLE,material TEXT,precio_individual DOUBLE,precio_total DOUBLE)",
         );
       },
       version: 4,
@@ -176,8 +184,9 @@ class DB {
 
   static Future<List<InventarioClass>> getAllInventario() async {
     Database database = await _openDB();
-    final List<Map<String, dynamic>> provedoresMap =
-        await database.query("inventario",);
+    final List<Map<String, dynamic>> provedoresMap = await database.query(
+      "inventario",
+    );
 
     return List.generate(
         provedoresMap.length,
@@ -190,10 +199,12 @@ class DB {
             precio_total: provedoresMap[i]['precio_total'],
             tipo_joya: provedoresMap[i]['tipo_joya']));
   }
-  static Future<List<InventarioClass>> getAllInventarioByMaterial(String materia) async {
+
+  static Future<List<InventarioClass>> getAllInventarioByMaterial(
+      String materia) async {
     Database database = await _openDB();
-    final List<Map<String, dynamic>> provedoresMap =
-        await database.query("inventario",where: "material = ?" , whereArgs: [materia] );
+    final List<Map<String, dynamic>> provedoresMap = await database
+        .query("inventario", where: "material = ?", whereArgs: [materia]);
 
     return List.generate(
         provedoresMap.length,
@@ -236,6 +247,87 @@ class DB {
   }
 
 //fin del CRUD de los tipos
+
+//inico del CRUD de los clientes
+  static Future<void> inserCliente(ClienteClass cc) async {
+    Database database = await _openDB();
+
+    database.insert("clientes", cc.toMap());
+    return;
+  }
+
+  static Future<void> deleteCliente(ClienteClass cc) async {
+    Database database = await _openDB();
+
+    database.delete("clientes", where: "CI = ?", whereArgs: [cc.ci]);
+    database.delete("clienteInventario", where: "idCliente = ?", whereArgs: [cc.idCliente]);
+    return;
+  }
+
+  static Future<void> updateCliente(ClienteClass cc) async {
+    Database database = await _openDB();
+    database
+        .update("clientes", cc.toMap(), where: "idCliente = ?", whereArgs: [cc.idCliente]);
+    return;
+  }
+
+  static Future<List<ClienteClass>> getALLClientes() async {
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> provedoresMap =
+        await database.query("clientes");
+
+    return List.generate(
+        provedoresMap.length,
+        (i) => ClienteClass(
+            nombre: provedoresMap[i]['nombre'],
+            ci: provedoresMap[i]['ci'],
+            direccion: provedoresMap[i]['direccion'],
+            notas: provedoresMap[i]['notas'],
+            movil: provedoresMap[i]['movil'],
+            idCliente: provedoresMap[i]['idCliente'],
+            ));
+  }
+
+//fin del CRUD de los clientes
+
+
+//incio del CRUD de los clientesInventario
+static Future<void> inserClienteInventario(ClientesInventarioClass cic) async {
+    Database database = await _openDB();
+
+    database.insert("clienteInventario", cic.toMap());
+    return;
+  }
+
+  static Future<void> deleteClienteInventrioClass(ClientesInventarioClass cic) async {
+    Database database = await _openDB();
+
+    database.delete("clienteInventario", where: "idClienteInventario = ?", whereArgs: [cic.idClienteInventario]);
+    return;
+  }
+  static Future<List<ClientesInventarioClass>> getALLClientesInventario(int idClienteInventario) async {
+    Database database = await _openDB();
+    final List<Map<String, dynamic>> provedoresMap =
+        await database.query("clienteInventario");
+
+    return List.generate(
+        provedoresMap.length,
+        (i) => ClientesInventarioClass(
+            cantidad: provedoresMap[i]['cantidad'],
+            gramaje: provedoresMap[i]['gramaje'],
+            material: provedoresMap[i]['material'],
+            precio_individual: provedoresMap[i]['precio_individual'],
+            precio_total: provedoresMap[i]['precio_total'],
+            tipo_joya: provedoresMap[i]['tipo_joya'],
+            idClienteInventario: provedoresMap[i]['idClienteInventario'],
+            idCliente: provedoresMap[i]['idCliente'],
+            ));
+  }
+
+
+//fin del CRUD de los clientesInventario
+
+
   // CON SENTENCIAS
 /*  static Future<void> insertar2(Animal animal) async {
     Database database = await _openDB();
