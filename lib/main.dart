@@ -5,6 +5,7 @@ import 'package:flutter_application_1/Inventario/crearInventario.dart';
 import 'package:flutter_application_1/Inventario/inventarioPrincipal.dart';
 
 import 'package:flutter_application_1/principal.dart';
+import 'package:flutter_application_1/reportes/reportes.dart';
 
 import 'Proveedor/Provedor.dart';
 import 'Proveedor/provedorPrincipal.dart';
@@ -62,6 +63,7 @@ class MiApp extends StatelessWidget {
           const agregarInventarioAlClientePrincial(
             key: Key("J"),
           ),
+          "/reportes": (context) => Reportes(key: Key("k")),
     });
   }
 }

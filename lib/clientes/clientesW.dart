@@ -70,7 +70,6 @@ class _ClientesWState extends State<ClientesW> {
                 builder: (context) => cargarInventarioCliente(parametro: clientes[index].idCliente),
               ),
             );
-          print('Card clicked');
         },
         child: Card(
           clipBehavior: Clip.antiAlias,

@@ -5,22 +5,42 @@ import 'package:flutter_application_1/Gastos/gastosClass.dart';
 import '../db.dart';
 
 class GtastosW extends StatefulWidget {
+  final List<GastosClass>? gastos;
+
+  GtastosW({this.gastos});
+
   @override
   _GtastosWState createState() => _GtastosWState();
 }
 
 class _GtastosWState extends State<GtastosW> {
   List<GastosClass> gastos = [];
+
+  @override
   void initState() {
-    caragrGastos();
+    if (widget.gastos != null) {
+      gastos = widget.gastos!;
+    } else {
+      cargarGastos();
+    }
     super.initState();
   }
 
-  caragrGastos() async {
+  cargarGastos() async {
     List<GastosClass> aux = await DB.getAllGastos();
     setState(() {
       gastos = aux;
     });
+  }
+
+  @override
+  void didUpdateWidget(GtastosW oldWidget) {
+    if (oldWidget.gastos != widget.gastos) {
+      setState(() {
+        gastos = widget.gastos ?? [];
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -35,7 +55,7 @@ class _GtastosWState extends State<GtastosW> {
               leading: Text(gastos[index].nombre),
               title: Text(gastos[index].categoria),
               subtitle: Text(gastos[index].fecha),
-              trailing: Text(gastos[index].importe.toString()+"\$"),
+              trailing: Text(gastos[index].importe.toString() + "\$"),
             ),
           ],
         ),
